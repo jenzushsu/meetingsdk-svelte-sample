@@ -1,0 +1,74 @@
+<script>
+  import { ZoomMtg } from "@zoom/meetingsdk";
+  ZoomMtg.preLoadWasm();
+  ZoomMtg.prepareWebSDK();
+
+  var authEndpoint = "";
+  var sdkKey = "";
+  var meetingNumber = "";
+  var passWord = "";
+  var role = 0;
+  var userName = "Svelte";
+  var userEmail = "";
+  var registrantToken = "";
+  var zakToken = "";
+  var leaveUrl = "http://localhost:5173/";
+
+  function getSignature() {
+    fetch(authEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        meetingNumber: meetingNumber,
+        role: role,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        startMeeting(data.signature);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function startMeeting(signature) {
+    document.getElementById("zmmtg-root").style.display = "block";
+
+    ZoomMtg.init({
+      leaveUrl: leaveUrl,
+      patchJsMedia: true,
+      leaveOnPageUnload: true,
+      success: (success) => {
+        console.log(success);
+        ZoomMtg.join({
+          signature: signature,
+          sdkKey: sdkKey,
+          meetingNumber: meetingNumber,
+          passWord: passWord,
+          userName: userName,
+          userEmail: userEmail,
+          tk: registrantToken,
+          zak: zakToken,
+          success: (success) => {
+            console.log(success);
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+</script>
+
+<div>
+  <h1>Zoom Meeting SDK Svelte Sample</h1>
+  <button on:click={getSignature}>Join Meeting</button>
+</div>

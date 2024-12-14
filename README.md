@@ -8,7 +8,7 @@ This repo is a [Svelte](https://svelte.dev/) app generated via [Vite](https://vi
 
 To get started, clone the repo:
 
-`$ git clone https://github.com/zoom/meetingsdk-vuejs-sample.git`
+`$ git clone https://github.com/zoom/meetingsdk-svelte-sample.git`
 
 ## Setup
 

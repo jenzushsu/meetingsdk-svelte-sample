@@ -3,6 +3,11 @@
   "private": true,
   "version": "3.10.0",
   "author": "Jenzus Hsu",
+  "contributors": [
+    {
+      "name": "Jenzus Hsu"
+    }
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",

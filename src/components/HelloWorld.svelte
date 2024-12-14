@@ -70,5 +70,5 @@
 
 <div>
   <h1>Zoom Meeting SDK Svelte Sample</h1>
-  <button on:click={getSignature}>Join Meeting</button>
+  <button onclick={getSignature}>Join Meeting</button>
 </div>
